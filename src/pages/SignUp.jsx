@@ -1,46 +1,47 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./SignUp.module.css";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { baseUrl } from "../api";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setFullName,
+  setPassword,
+  setUserEmail,
+} from "../stores/features/user";
 
 function SignUp() {
-  const [email, setEmail] = useState("");
-  const [password1, setPassword1] = useState("");
-  const [password2, setPassword2] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { fullName, email, password } = useSelector((state) => state.user);
   const onSubmitEvent = (e) => {
     e.preventDefault();
-    axios
-      .post(`${baseUrl}/accounts/registration/`, {
-        email,
-        password1,
-        password2,
-      })
-      .then((res) => {
-        console.log(res.data);
-        alert("회원가입이 완료되었습니다.");
-        navigate("/login");
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("비밀번호는 영어,숫자,특수기호를 포함해 8자 이상이어야 합니다");
-      });
+    alert(`회원가입이 완료되었습니다`);
+    navigate("/login");
+  };
+  const onChangeFullName = (e) => {
+    dispatch(setFullName(e.target.value));
   };
   const onChangeEmail = (e) => {
-    setEmail(e.target.value);
+    dispatch(setUserEmail(e.target.value));
   };
-  const onChangePassword1 = (e) => {
-    setPassword1(e.target.value);
-  };
-  const onChangePassword2 = (e) => {
-    setPassword2(e.target.value);
+  const onChangePassword = (e) => {
+    dispatch(setPassword(e.target.value));
   };
   return (
     <div className={styles.signup_wrap}>
       <form className={styles.signup_form} onSubmit={onSubmitEvent}>
         <h1 className={styles.signup_h1}>회원가입</h1>
-        <label className={styles.signup_label} for="email">
+        <label className={styles.signup_label} htmlFor="name">
+          이름:
+        </label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          required
+          value={fullName}
+          onChange={onChangeFullName}
+        />
+        <label className={styles.signup_label} htmlFor="email">
           이메일:
         </label>
         <input
@@ -51,27 +52,15 @@ function SignUp() {
           value={email}
           onChange={onChangeEmail}
         />
-
-        <label className={styles.signup_label} for="password1">
+        <label className={styles.signup_label} htmlFor="password1">
           비밀번호:
         </label>
         <input
           type="password"
           id="password1"
           name="password1"
-          value={password1}
-          onChange={onChangePassword1}
-          required
-        />
-        <label className={styles.signup_label} for="password2">
-          비밀번호 확인:
-        </label>
-        <input
-          type="password"
-          id="password2"
-          name="password2"
-          value={password2}
-          onChange={onChangePassword2}
+          value={password}
+          onChange={onChangePassword}
           required
         />
         <div

@@ -3,6 +3,7 @@
   top: 3%;
   display: flex;
   align-items: center;
+  flex-direction: column;
   justify-content: center;
   left: 0;
   right: 0;
@@ -73,6 +74,7 @@
   width: 360px;
   height: 730px;
   padding: 0;
+  border-radius: 5px;
 }
 input[type="checkbox"] {
   display: none;
@@ -82,4 +84,15 @@ input[type="checkbox"] {
   height: 18px;
   border-radius: 50%;
   border: 1px solid #cd5c4a;
+}
+.distance_wrap {
+  align-self: auto;
+  background-color: #ec6a56;
+  border-radius: 10px;
+  margin-top: 5px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  gap: 10px;
 }

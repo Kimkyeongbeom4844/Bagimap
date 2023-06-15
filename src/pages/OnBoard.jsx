@@ -9,7 +9,7 @@ function OnBoard() {
     const timer = setTimeout(() => {
       clearTimeout(timer);
       navigate("/login");
-    }, 2000);
+    }, 2222);
   }, []);
   return (
     <div className={styles.onboard_wrap}>

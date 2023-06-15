@@ -1,42 +1,19 @@
 import React, { useState } from "react";
 import styles from "./Login.module.css";
-import axios from "axios";
-import { baseUrl } from "../api";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {
-  setFirstName,
-  setUserEmail,
-  setLastName,
-  setPk,
-} from "../stores/features/user";
-import Router from "../router/Route";
 
 function Main() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const dispatch = useDispatch();
+  const { email: realEmail, password: realPassword } = useSelector(
+    (state) => state.user
+  );
   const navigate = useNavigate();
   const onSubmitEvent = (e) => {
     e.preventDefault();
-    axios
-      .post(`${baseUrl}/accounts/login/`, {
-        email,
-        password,
-      })
-      .then((res) => {
-        console.log(res.data);
-        const { pk, email: userEmail, first_name, last_name } = res.data.user;
-        dispatch(setFirstName(first_name));
-        dispatch(setLastName(last_name));
-        dispatch(setUserEmail(userEmail));
-        dispatch(setPk(pk));
-        navigate("/main");
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("이메일 또는 비밀번호를 확인해주세요!");
-      });
+    if (email === realEmail && password === realPassword) navigate("/main");
+    else alert("정보를 다시 입력해주세요");
   };
   const onChangeEmail = (e) => {
     setEmail(e.target.value);
@@ -74,9 +51,6 @@ function Main() {
         <button type="button" onClick={() => navigate("/signup")}>
           회원가입
         </button>
-        {/* <button type="button" id="kakao_login">
-          카카오 로그인
-        </button> */}
       </form>
     </div>
   );
