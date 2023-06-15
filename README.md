@@ -3,7 +3,7 @@
 ## 🔎FE Introduce
 
 ```
-제주대학교 4학년 캡스톤디자인 Bagimap팀 FE
+제주대학교 캡스톤디자인 Bagimap팀 FE
 ```
 
 ## ⛏ FE Development Dependencies
@@ -11,6 +11,7 @@
 ```
 React
 Redux ToolKit
+kakao API
 ```
 
 ## 🚀 FE Deploy
