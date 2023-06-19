@@ -167,6 +167,7 @@ function Main() {
                   bycicleTime >= 60 ? `${Math.floor(bycicleTime / 60)}시간` : ``
                 } ${bycicleTime % 60}분`
             );
+            setMarkerName(data[i].place_name);
             setIsMouseoverMarker(true);
             setDistance(polyline.getLength());
           });
